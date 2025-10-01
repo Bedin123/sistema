@@ -4,55 +4,131 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Registro - Tecsystem</title>
+
   <style>
-    body {
+    /* ===== Reset Básico ===== */
+    * {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(to right, #0a1931, #185adb);
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #0a1931, #185adb, #21e6c1);
+      background-size: 300% 300%;
+      animation: gradientBG 12s ease infinite;
       color: #fff;
+      height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
     }
+
+    /* Animação suave do gradiente */
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
     .container {
-      background: rgba(255,255,255,0.1);
-      padding: 30px;
-      border-radius: 12px;
-      width: 300px;
+      background: rgba(255, 255, 255, 0.12);
+      padding: 40px;
+      border-radius: 16px;
+      width: 350px;
       text-align: center;
-      box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+      animation: fadeIn 1s ease;
     }
-    input {
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    .container h2 {
+      margin-bottom: 20px;
+      font-size: 1.8rem;
+      font-weight: 600;
+      color: #ffd32a;
+    }
+
+    .input-group {
+      position: relative;
+      margin: 15px 0;
+    }
+
+    .input-group input {
       width: 100%;
-      padding: 12px;
-      margin: 10px 0;
+      padding: 14px 12px;
       border-radius: 8px;
       border: none;
       outline: none;
+      font-size: 1rem;
+      background: rgba(255,255,255,0.2);
+      color: #fff;
     }
-    button {
+
+    .input-group input::placeholder {
+      color: rgba(255,255,255,0.7);
+    }
+
+    .container button {
       width: 100%;
-      padding: 12px;
-      background: #ffd32a;
+      padding: 14px;
+      margin-top: 15px;
+      background: linear-gradient(45deg, #ffd32a, #f0c000);
       border: none;
       border-radius: 8px;
+      font-size: 1rem;
       font-weight: bold;
       cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      color: #000;
     }
-    button:hover {
-      background: #f0c000;
+
+    .container button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+    }
+
+    #msg {
+      margin-top: 15px;
+      font-size: 0.9rem;
+      min-height: 20px;
+    }
+
+    .link-login {
+      display: block;
+      margin-top: 20px;
+      color: #ffd32a;
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.3s;
+    }
+
+    .link-login:hover {
+      color: #fff;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h2>Criar Conta</h2>
-    <input type="email" id="email" placeholder="E-mail">
-    <input type="password" id="password" placeholder="Senha">
+    <h2>Crie sua Conta</h2>
+
+    <div class="input-group">
+      <input type="email" id="email" placeholder="Digite seu e-mail">
+    </div>
+    <div class="input-group">
+      <input type="password" id="password" placeholder="Digite sua senha">
+    </div>
+
     <button onclick="register()">Registrar</button>
     <p id="msg"></p>
-    <a href="login.html" style="color:#ffd32a; text-decoration:none;">Já tenho conta</a>
+
+    <a href="login.html" class="link-login">Já tenho conta</a>
   </div>
 
   <script type="module">
@@ -60,13 +136,13 @@
     import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 
     const firebaseConfig = {
-    apiKey: "AIzaSyDBT003T8yUs8aYIZmuC4LeRCDkpOnT1qc",
-    authDomain: "projeto-teste-eb434.firebaseapp.com",
-    projectId: "projeto-teste-eb434",
-    storageBucket: "projeto-teste-eb434.firebasestorage.app",
-    messagingSenderId: "831779709223",
-    appId: "1:831779709223:web:d7afd5d77cdbc3f4004902",
-    measurementId: "G-5WFJRGLD1J"
+      apiKey: "AIzaSyDBT003T8yUs8aYIZmuC4LeRCDkpOnT1qc",
+      authDomain: "projeto-teste-eb434.firebaseapp.com",
+      projectId: "projeto-teste-eb434",
+      storageBucket: "projeto-teste-eb434.firebasestorage.app",
+      messagingSenderId: "831779709223",
+      appId: "1:831779709223:web:d7afd5d77cdbc3f4004902",
+      measurementId: "G-5WFJRGLD1J"
     };
 
     const app = initializeApp(firebaseConfig);
